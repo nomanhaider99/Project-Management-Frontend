@@ -47,7 +47,11 @@ export class UserService {
 
     async isLoggedIn() {
         const response = await fetch(`${environments.API_BASE_URL}/users/is-loggedin`, {
-            credentials: 'include'
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            }
         })
         const isLoggedIn = await response.json();
 
