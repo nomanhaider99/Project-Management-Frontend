@@ -47,7 +47,7 @@ import { ProjectsModule } from './shared/components/projects/projects.module';
     UserDashboardModule,
     BusinessDashboardModule,
     CreateProjectModule,
-    ProjectsModule
+    ProjectsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,7 +7,7 @@ import { TaskType } from 'src/app/core/types/tasks.types';
   templateUrl: './milestone.component.html',
   styleUrls: ['./milestone.component.css']
 })
-export class MilestoneComponent implements OnInit {
+export class MilestoneComponent implements OnInit, OnChanges {
   @Input() status: any;
   @Input() title: string = '';
   @Input() description: string = '';
@@ -26,6 +26,10 @@ export class MilestoneComponent implements OnInit {
     });
   }
 
+  fetchFilteredTasks (value: any) {
+    this.tasks = value;
+  }
+
   fetchTasksOfMilestone () {
     this.tasksService.getTasksOfMilestone(this.milestone, this.project)
     .subscribe({
@@ -41,6 +45,9 @@ export class MilestoneComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchTasksOfMilestone();
-    console.log(this.milestone, this.project);
+  }
+
+  ngOnChanges(): void {
+    this.fetchTasksOfMilestone();
   }
 }

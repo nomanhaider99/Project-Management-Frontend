@@ -7,6 +7,7 @@ import { PasswordInputModule } from "../../password-input/password-input.module"
 import { LoginComponent } from "./login.component";
 import { BrowserModule } from "@angular/platform-browser";
 import { ResultModule } from "src/app/shared/components/result/result.module";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
     declarations: [

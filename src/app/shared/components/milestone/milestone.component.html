@@ -43,7 +43,7 @@
             class="flex flex-col gap-2"
         >
             <app-task *ngFor="let task of tasks; index as i" [taskNo]="i+1   " [title]="task.title"
-                [description]="task.description" [taskId]="task._id"></app-task>
+                [description]="task.description" [taskId]="task._id" (filteredTasksEmmiter)="fetchFilteredTasks($event)" [tasks]="tasks"></app-task>
         </div>
         <div
             *ngIf="tasks.length == 0"

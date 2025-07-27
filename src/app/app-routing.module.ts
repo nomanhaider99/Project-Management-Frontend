@@ -64,7 +64,8 @@ const routes: Routes = [
   },
   {
     path: 'business/dashboard',
-    component: BusinessDashboardComponent,
+    loadChildren: () => import('./features/dashboard/business/business.module').then(a=>a.BusinessDashboardModule),
+    pathMatch: 'full',
     canActivate: [businessAuthGuard]
   },
   {

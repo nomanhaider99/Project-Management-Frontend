@@ -8,6 +8,7 @@ import { ViewProjectModule } from "src/app/shared/components/view-component/view
 import { CreateMilestoneModule } from "src/app/shared/components/create-milestone/create-milstone.module";
 import { AddMemberModule } from "src/app/shared/components/add-member/add-member.module";
 import { AddTaskModule } from "src/app/shared/components/add-task/add-task.module";
+import { BusinessDashboardRoutingModule } from "./business-routing.module";
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import { AddTaskModule } from "src/app/shared/components/add-task/add-task.modul
         ViewProjectModule,
         CreateMilestoneModule,
         AddMemberModule,
-        AddTaskModule
+        AddTaskModule,
+        BusinessDashboardRoutingModule
     ]
 })
 

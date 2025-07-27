@@ -19,6 +19,10 @@ export class BusinessProjectsComponent {
     this.viewClick.emit(event);
   }
 
+  fetchFilteredData (value: any) {
+    this.projects = value
+  }
+
   fetchData() {
     this.businessService.getLoggedInBusiness()
       .subscribe({

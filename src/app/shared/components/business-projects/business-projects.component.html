@@ -20,6 +20,8 @@
                     [startDate]="project.startDate"
                     (viewClick)="onViewButtonClicked($event)"
                     [milestones]="project.milestones"
+                    [projects]="projects"
+                    (fiteredProjectsEmmiter)="fetchFilteredData($event)"
                 ></app-project>
             </div>
         </div>
