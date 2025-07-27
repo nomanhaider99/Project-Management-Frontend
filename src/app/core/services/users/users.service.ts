@@ -53,9 +53,12 @@ export class UserService {
                 'Content-Type': 'application/json',
             }
         })
-        const isLoggedIn = await response.json();
+        if (!response.ok) {
+            throw new Error('Failed to check login status');
+        }
 
-        return isLoggedIn;
+        const result = await response.json();
+        return result;
     }
 
     logoutUser() {

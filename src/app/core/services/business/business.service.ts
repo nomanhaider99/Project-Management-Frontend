@@ -9,43 +9,51 @@ import { Observable } from "rxjs";
 export class BusinessService {
     http: HttpClient = inject(HttpClient);
 
-    registerBusiness (name: string, email: string, password: string): Observable<any> {
-        const data = {name, email, password};
+    registerBusiness(name: string, email: string, password: string): Observable<any> {
+        const data = { name, email, password };
         return this.http.post(`${environments.API_BASE_URL}/businesses/create-business`, data);
     }
 
-    loginBusiness (email: string, password: string): Observable<any> {
-        const data = {email, password};
+    loginBusiness(email: string, password: string): Observable<any> {
+        const data = { email, password };
         return this.http.post(`${environments.API_BASE_URL}/businesses/login-business`, data, {
             withCredentials: true
         });
     }
 
-    logoutBusiness (): Observable<any> {
+    logoutBusiness(): Observable<any> {
         return this.http.get(`${environments.API_BASE_URL}/businesses/logout-business`, {
             withCredentials: true
         });
     }
 
-    async isBusinessLoggedIn () {
+    async isBusinessLoggedIn() {
         const response = await fetch(`${environments.API_BASE_URL}/businesses/isloggedin-business`, {
-            credentials: 'include'
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            }
         });
-        const isLoggedIn = await response.json();
 
-        return isLoggedIn;
+        if (!response.ok) {
+            throw new Error('Failed to check login status');
+        }
+
+        const result = await response.json();
+        return result;
     }
 
-    getBusinessById (id: string): Observable<any> {
+    getBusinessById(id: string): Observable<any> {
         return this.http.get(`${environments.API_BASE_URL}/businesses/get-business/${id}`);
     }
 
-    updateBusiness (id: string /* Default For Now TODO::  */, tagline: string, description?: string, address?: string): Observable<any> {
+    updateBusiness(id: string /* Default For Now TODO::  */, tagline: string, description?: string, address?: string): Observable<any> {
         const data = { tagline, description, address };
         return this.http.patch(`${environments.API_BASE_URL}/businesses/update-business/${id}`, data);
     }
 
-    getLoggedInBusiness (): Observable<any> {
+    getLoggedInBusiness(): Observable<any> {
         return this.http.get(`${environments.API_BASE_URL}/businesses/get-loggedin-business`, {
             withCredentials: true
         });
