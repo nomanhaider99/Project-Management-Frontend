@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BusinessService } from 'src/app/core/services/business/business.service';
 
@@ -7,7 +7,7 @@ import { BusinessService } from 'src/app/core/services/business/business.service
   templateUrl: './business.component.html',
   styleUrls: ['./business.component.css']
 })
-export class BusinessDashboardComponent implements OnInit {
+export class BusinessDashboardComponent implements OnInit, OnChanges {
   router: Router = inject(Router);
   businessService: BusinessService = inject(BusinessService);
   component: string = 'projects';
@@ -31,12 +31,32 @@ export class BusinessDashboardComponent implements OnInit {
     this.projectId = value.id;
   }
 
+  afterCreateTabChenger (value: any) {
+    this.component = value;
+  }
+
   getMilestoneClickFunc (value: any) {
     this.component = value.comp;
   }
 
   getAddMemberClickFunc (value: any) {
     this.component = value.comp;
+  }
+
+  afterAddMemberCompleted (value: any) {
+    this.component = value.comp;
+    this.projectId = value.project;
+  }
+
+  afterCreateMilestoneCompleted (value: any) {
+    this.component = value.comp;
+    this.projectId = value.project;
+  }
+
+  afterCreateTaskCompleted (value: any) {
+    this.component = value.comp;
+    this.projectId = value.project;
+    this.milestoneId = value.milestone;
   }
 
   getBusiness () {
@@ -52,6 +72,10 @@ export class BusinessDashboardComponent implements OnInit {
   }
 
   ngOnInit () {
+    this.getBusiness();
+  }
+
+  ngOnChanges () {
     this.getBusiness();
   }
 

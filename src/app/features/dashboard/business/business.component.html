@@ -45,7 +45,9 @@
             ></app-business-projects>
         </div>
         <div *ngIf="component == 'create'">
-            <app-create-project></app-create-project>
+            <app-create-project
+                (compValueEmmiter)="afterCreateTabChenger($event)"
+            ></app-create-project>
         </div>
         <div *ngIf="component == 'view'">
             <app-view-component
@@ -58,17 +60,20 @@
         <div *ngIf="component == 'create-milestone'">
             <app-create-milestone
                 [projectId]="projectId"
+                (createMilestoneEventEmmiter)="afterCreateMilestoneCompleted($event)"
             ></app-create-milestone>
         </div>
         <div *ngIf="component == 'add-member'">
             <app-add-member
                 [projectId]="projectId"
+                (AddMemberValueEmmiter)="afterAddMemberCompleted($event)"
             ></app-add-member>
         </div>
         <div *ngIf="component == 'add-task'">
             <app-add-task
                 [project]="projectId"
                 [milestone]="milestoneId"
+                (addTaskEventEmmiter)="afterCreateTaskCompleted($event)"
             ></app-add-task>
         </div>
     </div>

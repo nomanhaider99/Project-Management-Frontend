@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { format } from 'date-fns';
 import { BusinessService } from 'src/app/core/services/business/business.service';
@@ -17,6 +17,7 @@ export class CreateProjectComponent {
   projectService: ProjectsService = inject(ProjectsService);
   message: string = '';
   type: 'success' | 'error' = 'success';
+  @Output() compValueEmmiter = new EventEmitter<string>();
 
   constructor (fb: FormBuilder) {
     this.form = fb.group({
@@ -72,6 +73,7 @@ export class CreateProjectComponent {
             next: (res) => {
               this.type = 'success';
               this.message = 'Project Created Successfully!'
+              this.compValueEmmiter.emit('projects');
             },
             error: (err) => {
               this.type = 'error';

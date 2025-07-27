@@ -14,13 +14,18 @@ export class BusinessProjectsComponent {
   businessService: BusinessService = inject(BusinessService);
   owner: string = '';
   @Output() viewClick = new EventEmitter<string>();
+  @Output() projectValueEmmiter = new EventEmitter<ProjectType>();
+
+  fetchProjectsOptimistically () {
+    this.projectValueEmmiter.emit()
+  }
 
   onViewButtonClicked (event: any) {
     this.viewClick.emit(event);
   }
 
   fetchFilteredData (value: any) {
-    this.projects = value
+    this.projects = value;
   }
 
   fetchData() {

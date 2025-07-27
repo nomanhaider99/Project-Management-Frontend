@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TasksService } from 'src/app/core/services/tasks/tasks.service';
 
@@ -14,6 +14,7 @@ export class AddTaskComponent {
   tasksService: TasksService = inject(TasksService);
   @Input() project: string = '';
   @Input() milestone: string = '';
+  @Output() addTaskEventEmmiter = new EventEmitter<{comp: string, project: string, milestone: string}>(); 
 
   constructor(fb: FormBuilder) {
     this.form = fb.group({
@@ -50,6 +51,11 @@ export class AddTaskComponent {
         next: (res) => {
           this.type = 'success';
           this.message = 'Task Created Successfully!'
+          this.addTaskEventEmmiter.emit({
+            comp: 'view',
+            project: data.project,
+            milestone: data.milestone
+          })
         },
         error: (err) => {
           this.type = 'error';

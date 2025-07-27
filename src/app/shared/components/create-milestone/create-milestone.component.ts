@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MilestoneService } from 'src/app/core/services/milestones/milestones.service';
 
@@ -13,6 +13,7 @@ export class CreateMilestoneComponent {
   @Input() projectId: string = '';
   form: FormGroup;
   milestoneService: MilestoneService = inject(MilestoneService);
+  @Output() createMilestoneEventEmmiter = new EventEmitter<{comp: string, project: string}>();
 
   constructor(fb: FormBuilder) {
     this.form = fb.group({
@@ -48,6 +49,10 @@ export class CreateMilestoneComponent {
           next: (res: any) => {
             this.type = 'success';
             this.message = 'Milestone Created Succesfully!'
+            this.createMilestoneEventEmmiter.emit({
+              comp: 'view',
+              project: data.project
+            })
           },
           error: (err) => {
             this.type = 'error';

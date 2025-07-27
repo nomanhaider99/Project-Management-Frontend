@@ -7,7 +7,10 @@
     <!-- Dashboard Body -->
     <div class="overflow-y-scroll no-scrollbar">
         <div class="w-full grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-            <div *ngFor="let project of projects">
+            <div 
+                *ngFor="let project of projects"
+                [ngIf]="projects.length > 0"
+            >
                 <app-user-project 
                     [_id]="project._id" 
                     [title]="project.title" 
@@ -22,6 +25,15 @@
                     [milestones]="project.milestones"
                 >
                 </app-user-project>
+            </div>
+            <div
+                *ngIf="projects.length == 0"
+                [ngClass]="{
+                    'hidden': projects.length != 0,
+                    'bg-slate-600 text-white px-4 py-2 rounded-md block': true
+                }"
+            >
+                No Projects Found
             </div>
         </div>
     </div>
