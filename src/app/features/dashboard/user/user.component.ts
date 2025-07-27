@@ -44,6 +44,7 @@ export class UserDashboardComponent {
     this.userService.logoutUser()
       .subscribe({
         next: (res) => {
+          console.log(res);
           this.router.navigateByUrl('/user/login');
         },
         error: (err) => {

@@ -63,7 +63,10 @@ export class UserService {
 
     logoutUser() {
         return this.http.get(`${environments.API_BASE_URL}/users/logout-user`, {
-            withCredentials: true
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'application/json'
+            },
         });
     }
 }
