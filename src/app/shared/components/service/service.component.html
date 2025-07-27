@@ -1,0 +1,12 @@
+<div class="w-full flex flex-col gap-3 pb-10 pt-32 md:px-10 px-0">
+    <div class="flex flex-col gap-1">
+        <div class="tracking-wider text-cyan-400">WHY WORKLEAP</div>
+        <div class="text-[2rem] text-zinc-100">Exceeding Expectations</div>
+        <div class="text-zinc-300">We're not just another agency; we'reyour path to expectional development.</div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div *ngFor="let item of data">
+            <app-service-card [heading]="item.heading" [description]="item.description"></app-service-card>
+        </div>
+    </div>
+</div>

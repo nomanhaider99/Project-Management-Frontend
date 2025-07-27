@@ -1,0 +1,27 @@
+<div class="h-full flex flex-col gap-6 p-4">
+    <!-- Dashboard Header -->
+    <div class="w-full bg-zinc-800/30 py-3 px-4 rounded-md flex justify-between items-center">
+        <div class="text-lg font-medium text-zinc-200">Projects</div>
+        
+    </div>
+    <!-- Dashboard Body -->
+    <div class="overflow-y-scroll no-scrollbar">
+        <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div *ngFor="let project of projects">
+                <app-project
+                    [_id]="project._id" 
+                    [title]="project.title" 
+                    [description]="project.description"
+                    [members]="project.members" 
+                    [owner]="project.owner" 
+                    [priority]="project.priority"
+                    [status]="project.status" 
+                    [progress]="project.progress"
+                    [startDate]="project.startDate"
+                    (viewClick)="onViewButtonClicked($event)"
+                    [milestones]="project.milestones"
+                ></app-project>
+            </div>
+        </div>
+    </div>
+</div>

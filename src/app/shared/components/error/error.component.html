@@ -1,0 +1,9 @@
+<div
+    [ngClass]="{
+        'block': !ifCondition,
+        'text-red-400 text-sm': true
+    }"
+    [ngIf]="ifCondition"
+>
+    {{errormessage}}
+</div>

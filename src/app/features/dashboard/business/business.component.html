@@ -1,0 +1,75 @@
+<div class="w-full md:h-[97vh] flex flex-col md:flex-row justify-between gap-2">
+    <!-- SIDEBAR -->
+    <div class="md:w-[15%] w-full p-4 h-full border-[1px] rounded-md border-zinc-300/10 flex flex-col justify-between">
+        <div class="flex flex-col gap-8">
+            <div>
+                <app-logo></app-logo>
+            </div>
+            <div class="flex flex-col gap-2">
+                <div 
+                    (click)="onTabClick('projects')"
+                    class="text-zinc-300 bg-zinc-800/60 cursor-pointer px-4 py-1 rounded-md" [ngClass]="{
+                        'border-[1px] border-zinc-200/20': component == 'projects'
+                    }"
+                >
+                    Projects
+                </div>
+                <div (click)="onTabClick('create')"
+                    class="text-zinc-300 bg-zinc-800/60 cursor-pointer px-4 py-1 rounded-md" [ngClass]="{
+                        'border-[1px] border-zinc-200/20': component == 'create'
+                    }">
+                    Create
+                </div>
+            </div>
+        </div>
+        <!-- LOGOUT -->
+        <div class="flex flex-col gap-3">
+            <div class="p-2 rounded-md border-[1px] border-zinc-300/10 flex flex-col gap-2 text-zinc-300 cursor-pointer">
+                <div class="">{{business?.name}}</div>
+                <div class="h-[1px] w-full bg-zinc-200/50"></div>
+                <div>{{business?.email}}</div>
+            </div>
+            <div class="p-2 rounded-md border-[1px] border-zinc-300/10 flex items-center gap-4 text-red-500 cursor-pointer"
+                (click)="logoutBusiness()">
+                <div><i class="fa-solid fa-arrow-right-from-bracket -rotate-180 text-white text-xl"></i></div>
+                <div class="">Logout</div>
+            </div>
+        </div>
+    </div>
+    <!-- DASHBOARD -->
+    <div
+        class="md:w-[85%] w-full h-full border-[1px] rounded-md border-zinc-300/10 flex flex-col gap-6 p-4 overflow-y-scroll no-scrollbar">
+        <div *ngIf="component == 'projects'">
+            <app-business-projects
+                (viewClick)="getViewClick($event)"
+            ></app-business-projects>
+        </div>
+        <div *ngIf="component == 'create'">
+            <app-create-project></app-create-project>
+        </div>
+        <div *ngIf="component == 'view'">
+            <app-view-component
+                [projectId]="projectId"
+                (controlCreateMilestone)="getMilestoneClickFunc($event)"
+                (controlAddMember)="getAddMemberClickFunc($event)"
+                (controlAddTask)="controlAddTaskClick($event)"
+            ></app-view-component>
+        </div>
+        <div *ngIf="component == 'create-milestone'">
+            <app-create-milestone
+                [projectId]="projectId"
+            ></app-create-milestone>
+        </div>
+        <div *ngIf="component == 'add-member'">
+            <app-add-member
+                [projectId]="projectId"
+            ></app-add-member>
+        </div>
+        <div *ngIf="component == 'add-task'">
+            <app-add-task
+                [project]="projectId"
+                [milestone]="milestoneId"
+            ></app-add-task>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="w-full flex flex-col gap-4 bg-gradient-to-br from-zinc-900 to-zinc-800/50 p-4 rounded-md">
+    <div [ngClass]="{
+                    'hidden': message == '',
+                    'block': message != '',
+                    'w-[400px]': true
+                }">
+        <app-result [message]="message" [type]="type"></app-result>
+    </div>
+    <div class="bg-zinc-50 text-zinc-950 p-4 font-medium w-[5px] h-[5px] flex justify-center items-center rounded-full">
+        {{mielstoneNo}}</div>
+    <!-- Milestone Details -->
+    <div class="w-full flex flex-col gap-2">
+        <div class="w-full flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div>
+                    <div>
+                        <div class="px-4 py-1 rounded-full bg-red-700 text-white font-medium"
+                            *ngIf="status == 'expired'">
+                            {{status}}
+                        </div>
+                        <div class="px-4 py-1 rounded-full bg-green-700 text-white font-medium"
+                            *ngIf="status == 'completed'">
+                            {{status}}
+                        </div>
+                        <div class="px-4 py-1 rounded-full bg-yellow-700 text-white font-medium"
+                            *ngIf="status == 'ongoing'">
+                            {{status}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <app-button text="Milestone Completed" [isPrimary]="false"
+                    (clickEvent)="onMilestoneCompletion()"></app-button>
+            </div>
+        </div>
+        <div class="flex flex-col gap-1">
+            <div class="text-[1.5rem] text-zinc-200">{{title}}</div>
+            <div class="text-zinc-300">{{description}}</div>
+        </div>
+    </div>
+    <!-- Tasks Loops -->
+    <div class="flex flex-col gap-3">
+        <div class="text-[1.5rem] font-medium text-zinc-200">Tasks</div>
+        <div *ngIf="tasks.length > 0" class="flex flex-col gap-2">
+            <app-user-task *ngFor="let task of tasks; index as i" [taskNo]="i+1   " [title]="task.title"
+                [description]="task.description" [taskId]="task._id"></app-user-task>
+        </div>
+        <div *ngIf="tasks.length == 0" class="px-4 py-2 rounded-md bg-slate-700 text-zinc-100">
+            No Tasks Added!
+        </div>
+    </div>
+</div>

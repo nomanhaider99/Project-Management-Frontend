@@ -1,0 +1,45 @@
+<main class="w-full h-screen flex justify-center items-center">
+    <!-- Form -->
+    <div class="flex flex-col gap-5">
+        <div [ngClass]="{
+                    'hidden': message == '',
+                    'block': message != '',
+                    'w-[400px]': true
+                }">
+            <app-result [message]="message" [type]="type"></app-result>
+        </div>
+        <!-- Header -->
+        <div class="flex flex-col gap-1">
+            <div class="text-white text-[2rem]">Setup Your User Profile</div>
+            <div class="text-zinc-300 text-[1rem]">Enter your detials in the inputs below to setup your user profile quickly.</div>
+        </div>
+        <!-- Body -->
+        <form
+            (ngSubmit)="submitForm()"
+        >
+            <div class="flex flex-col gap-6">
+                <div class="flex flex-col gap-2">
+                    <app-input [control]="getControl('tagline')" placeholder="Enter Your Profile Tagline"></app-input>
+                    <!-- Validators -->
+                    <div *ngIf="tagline?.errors?.['required']" class="text-red-500">Tagline is Required!</div>
+                    <div *ngIf="tagline?.errors?.['minlength']" class="text-red-500">Tagline must be atleast of 15
+                        Characters!</div>
+                    <div *ngIf="tagline?.errors?.['maxlength']" class="text-red-500">Tagline must not be more than 80
+                        Characters!</div>
+
+                    <app-textarea [control]="getControl('description')" [height]="60"
+                    placeholder="Enter Your Professional Description"></app-textarea>
+                    <!-- Validators -->
+                    <div *ngIf="description?.errors?.['minlength']" class="text-red-500">Description must be atleast of 30 Characters!</div>
+                    <div *ngIf="description?.errors?.['maxlength']" class="text-red-500">Description must not be more than 600 Characters!</div>
+                </div>
+                <div>
+                    <app-button text="Complete Setup" type="submit"></app-button>
+                </div>
+            </div>
+        </form>
+        <!-- Footer -->
+        <div class="text-zinc-200">If you face any problem during this process contact our team here. <span
+                class="text-cyan-400 font-medium">infoworkleap&#64;workleap.com</span></div>
+    </div>
+</main>

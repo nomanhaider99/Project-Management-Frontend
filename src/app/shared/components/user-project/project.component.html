@@ -1,0 +1,70 @@
+<div
+    class="p-4 min-h-[380px] rounded-md bg-gradient-to-br from-zinc-900 to-zinc-800 border-[1px] border-zinc-200/5 flex flex-col justify-between gap-4 tracking-tight">
+    <!-- HEADER -->
+    <div class="w-full flex justify-between items-center">
+        <div class="px-4 py-1 rounded-full bg-blue-500 text-white font-medium" *ngIf="priority == 'low'">
+            {{priority}}
+        </div>
+        <div class="px-4 py-1 rounded-full bg-amber-700 text-white font-medium" *ngIf="priority == 'medium'">
+            {{priority}}
+        </div>
+        <div class="px-4 py-1 rounded-full bg-red-500 text-white font-medium" *ngIf="priority == 'urgent'">
+            {{priority}}
+        </div>
+        <div class="flex items-center gap-2">
+            <div class="border-[1px] border-zinc-100 text-zinc-100 rounded-full px-4 py-1">
+                {{progress.toString().slice(0,5)}}%
+            </div>
+            <div>
+                <div class="px-4 py-1 rounded-full bg-red-700 text-white font-medium" *ngIf="status == 'expired'">
+                    {{status}}
+                </div>
+                <div class="px-4 py-1 rounded-full bg-green-700 text-white font-medium" *ngIf="status == 'completed'">
+                    {{status}}
+                </div>
+                <div class="px-4 py-1 rounded-full bg-yellow-700 text-white font-medium" *ngIf="status == 'ongoing'">
+                    {{status}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BODY -->
+    <div class="flex flex-col gap-1">
+        <div class="text-2xl font-semibold text-white">{{title.slice(0, 26) + '..'}}</div>
+        <div class="text-zinc-300">{{description}}</div>
+    </div>
+    <!-- FOOTER -->
+    <div class="w-full flex flex-col gap-2">
+        <!-- ACTIVITY & MEMBERS -->
+        <div class="flex flex-col gap-1 text-lg text-zinc-500">
+            <div class="flex items-center gap-3">
+                <div><span class="text-zinc-100">{{milestones.length}}</span> Milestones</div>
+            </div>
+            <div></div>
+        </div>
+        <!-- BUTTON -->
+        <div class="w-full flex items-center gap-4">
+            <div
+                (click)="viewButtonClick(_id)"
+            >
+                <app-button text="View Project" [isPrimary]="false"></app-button>
+            </div>
+        </div>
+        <!-- Members -->
+        <div *ngIf="members?.length! < 2" class="text-zinc-500 flex items-center gap-1">
+            <span class="text-zinc-100">{{members?.length}}</span>
+            <span>Member</span>
+        </div>
+        <div *ngIf="members?.length! > 1" class="text-zinc-500 flex items-center gap-1">
+            <span class="text-zinc-100">{{members?.length}}</span>
+            <span>Members</span>
+        </div>
+        <!-- Bottom -->
+        <div class="flex justify-between items-center">
+            <div class="text-zinc-400">
+                Project By: <span class="text-zinc-200">{{owner}}</span>
+            </div>
+            <div class="text-zinc-200">Started: <span>{{startDate.slice(0, 6) + ', ' + startDate.slice(7, 12)}}</span></div>
+        </div>
+    </div>
+</div>

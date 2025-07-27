@@ -1,0 +1,41 @@
+<div class="flex justify-center items-center">
+    <!-- Form -->
+    <div class="flex flex-col gap-8">
+        <!-- HEADER -->
+        <div class="flex flex-col gap-1">
+            <div class="text-white text-[2rem]">Add New Member</div>
+            <div class="text-zinc-300 text-[1rem]">Welcome! Add a new member to your project by providing a username.</div>
+        </div>
+        <!-- BODY -->
+        <form
+            (ngSubmit)="submitAddMemberForm()"
+        >
+            <div class="flex flex-col gap-6">
+                <div class="flex flex-col gap-2">
+                    <!-- Title -->
+                    <label class="text-zinc-100 font-medium">Username</label>
+                    <app-input [control]="getControl('username')" placeholder="Username Here..."></app-input>
+                    <!-- Validators -->
+                    <div class="text-red-500" *ngIf="username?.errors?.['required']">
+                        Username is Required!
+                    </div>
+                </div>
+                <div [ngClass]="{
+                    'hidden': message == '',
+                    'block': message != '',
+                    'w-[400px]': true
+                }">
+                    <app-result [message]="message" [type]="type"></app-result>
+                </div>
+                <div>
+                    <app-button type="submit" text="Add Member"></app-button>
+                </div>
+            </div>
+        </form>
+        <!-- FOOTER -->
+        <div class="text-zinc-200">
+            If you face any problem during this process contact our team here. <span
+                class="text-cyan-400 font-medium">infoworkleap&#64;workleap.com</span>
+        </div>
+    </div>
+</div>

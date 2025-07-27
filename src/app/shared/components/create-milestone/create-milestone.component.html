@@ -1,0 +1,63 @@
+<div class="flex justify-center items-center">
+    <!-- Form -->
+    <div class="flex flex-col gap-8">
+        <!-- HEADER -->
+        <div class="flex flex-col gap-1">
+            <div class="text-white text-[2rem]">Create a Milestone</div>
+            <div class="text-zinc-300 text-[1rem]">Welcome! Create a milestone Here by filling below fields.</div>
+        </div>
+        <!-- BODY -->
+        <form
+            (ngSubmit)="onMilestoneCreateSubmit()"
+        >
+            <div class="flex flex-col gap-6">
+                <div class="flex flex-col gap-2">
+                    <!-- Title -->
+                    <label class="text-zinc-100 font-medium">Title</label>
+                    <app-input [control]="getControl('title')" placeholder="Milestone Title Here"></app-input>
+                    <!-- Validators -->
+                    <div class="text-red-500" *ngIf="title?.errors?.['required']">
+                        Title is Required!
+                    </div>
+                    <div class="text-red-500" *ngIf="title?.errors?.['minlength']">
+                        Title must be at least of 6 charachters!
+                    </div>
+                    <div class="text-red-500" *ngIf="title?.errors?.['maxlength']">
+                        Title must not be more than 25 charachters!
+                    </div>
+                    <!-- Description -->
+                    <label class="text-zinc-100 font-medium">Description</label>
+                    <app-textarea
+                        [control]="getControl('description')" 
+                        placeholder="Milestone Title Here...">
+                    </app-textarea>
+                    <!-- Validators -->
+                    <div class="text-red-500" *ngIf="description?.errors?.['required']">
+                        Description is Required!
+                    </div>
+                    <div class="text-red-500" *ngIf="description?.errors?.['minlength']">
+                        Description must be at least of 30 charachters!
+                    </div>
+                    <div class="text-red-500" *ngIf="description?.errors?.['maxlength']">
+                        Description must not be more than 100 charachters!
+                    </div>
+                </div>
+                <div [ngClass]="{
+                    'hidden': message == '',
+                    'block': message != '',
+                    'w-[400px]': true
+                }">
+                    <app-result [message]="message" [type]="type"></app-result>
+                </div>
+                <div>
+                    <app-button type="submit" text="Create Milestone"></app-button>
+                </div>
+            </div>
+        </form>
+        <!-- FOOTER -->
+        <div class="text-zinc-200">
+            If you face any problem during this process contact our team here. <span
+                class="text-cyan-400 font-medium">infoworkleap&#64;workleap.com</span>
+        </div>
+    </div>
+</div>

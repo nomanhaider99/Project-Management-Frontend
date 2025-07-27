@@ -1,0 +1,80 @@
+<main class="w-full h-screen flex justify-between items-center">
+    <!-- FORM -->
+    <div class="md:w-1/2 w-full tracking-tight register flex justify-center items-center">
+        <!-- REGISTER -->
+        <div class="flex flex-col gap-4">
+            <div [ngClass]="{
+                    'hidden': message == '',
+                    'block': message != '',
+                    'w-[400px]': true
+                }">
+                <app-result
+                    [message]="message" 
+                    [type]="type"
+                ></app-result>
+            </div>
+            <!-- HEADER -->
+            <div class="flex flex-col gap-1">
+                <div class="text-white text-[2rem]">Register Your Business</div>
+                <div class="text-zinc-300 text-[1rem]">Enter your credentials, or continue with social accounts.</div>
+            </div>
+            <!-- BODY -->
+            <div class="flex flex-col gap-3">
+                <!-- CREDENTIALS -->
+                <div class="flex flex-col gap-6">
+                    <!-- INPUTs -->
+                    <form class="flex flex-col gap-4" (ngSubmit)="submitForm()">
+                        <div class="flex flex-col gap-2">
+                            <!-- name -->
+                            <div>
+                                <app-input [control]="getControl('name')" placeholder="ABC Business"></app-input>
+                                <div class="text-red-500" *ngIf="name?.errors?.['required']">
+                                    Business name is Required!
+                                </div>
+                                <div class="text-red-500" *ngIf="name?.errors?.['minlength']">
+                                    Business name must be at least of 2 charachters!
+                                </div>
+                                <div class="text-red-500" *ngIf="name?.errors?.['maxlength']">
+                                    Business name must not be more than 80 charachters!
+                                </div>
+                            </div>
+                            <!-- email -->
+                            <div>
+                                <app-input [control]="getControl('email')" placeholder="bussiness@abc.com"></app-input>
+                                <div class="text-red-500" *ngIf="email?.errors?.['required']">
+                                    Email is Required!
+                                </div>
+                                <div class="text-red-500" *ngIf="email?.errors?.['email']">
+                                    Invalid Email!
+                                </div>
+                            </div>
+                            <!-- Password -->
+                            <div>
+                                <app-password-input [control]="getControl('password')" placeholder="**********"
+                                    type="password"></app-password-input>
+                                <div class="text-red-500" *ngIf="password?.errors?.['required']">
+                                    Password is Required!
+                                </div>
+                                <div class="text-red-500" *ngIf="password?.errors?.['minlength']">
+                                    Password must be at least of 8 charachters!
+                                </div>
+                            </div>
+                        </div>
+                        <!-- BUTTON -->
+                        <div>
+                            <app-button [type]="'submit'" text="Register"></app-button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- FOOTER -->
+            <div class="text-zinc-200">If your have already join us? <a href="/business/login"
+                    class="text-blue-500 font-medium cursor-pointer hover:underline">Login Here</a></div>
+        </div>
+    </div>
+    <!-- SIDE -->
+    <div class="w-1/2 hero h-[90%] border-l-[1px] border-zinc-400/20 md:flex hidden justify-center items-center">
+        <div class="text-[8rem] font-semibold text-white leading-none text-center">Join Our Platform to Unlock an <span
+                class="text-cyan-500">Experience</span></div>
+    </div>
+</main>

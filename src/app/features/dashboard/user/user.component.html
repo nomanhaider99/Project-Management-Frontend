@@ -1,0 +1,51 @@
+<div class="w-full h-[97vh] flex md:flex-row flex-col justify-between gap-2">
+    <!-- SIDEBAR -->
+    <div class="md:w-[15%] w-full p-4 h-full border-[1px] rounded-md border-zinc-300/10 flex flex-col justify-between">
+        <div class="flex flex-col gap-8">
+            <div>
+                <app-logo></app-logo>
+            </div>
+            <div class="flex flex-col gap-2">
+                <div 
+                    (click)="onTabClick('projects')"
+                    class="text-zinc-300 bg-zinc-800/60 cursor-pointer px-4 py-1 rounded-md"
+                    [ngClass]="{
+                        'border-[1px] border-zinc-200/20': component == 'projects'
+                    }"
+                >
+                    Projects
+                </div>
+            </div>
+        </div>
+        <!-- LOGOUT -->
+        <div class="flex flex-col gap-3">
+            <div class="p-2 rounded-md border-[1px] border-zinc-300/10 flex flex-col gap-2 text-zinc-300 cursor-pointer">
+                <div class="">{{user?.username}}</div>
+                <div class="h-[1px] w-full bg-zinc-200/50"></div>
+                <div>{{user?.email}}</div>
+            </div>
+            <div class="p-2 rounded-md border-[1px] border-zinc-300/10 flex items-center gap-4 text-red-500 cursor-pointer"
+                (click)="logoutUser()">
+                <div><i class="fa-solid fa-arrow-right-from-bracket -rotate-180 text-white text-xl"></i></div>
+                <div class="">Logout</div>
+            </div>
+        </div>
+    </div>
+    <!-- DASHBOARD -->
+    <div
+        class="md:w-[85%] w-full h-full border-[1px] rounded-md border-zinc-300/10 flex flex-col gap-6 p-4 overflow-y-scroll no-scrollbar">
+        <div *ngIf="component == 'projects'">
+            <app-projects
+                (viewClickEmmiter)="onViewButtonClick($event)"
+            ></app-projects>
+        </div>
+        <div *ngIf="component == 'create'">
+            <app-create-project></app-create-project>
+        </div>
+        <div *ngIf="component == 'user-view'">
+            <app-user-view-component
+                [projectId]="projectId"
+            ></app-user-view-component>
+        </div>
+    </div>
+</div>

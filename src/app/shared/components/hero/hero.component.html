@@ -1,0 +1,31 @@
+<div class="w-full px-0 md:px-10 flex justify-between items-center">
+    <div class="w-full flex flex-col gap-2 md:pb-10 pt-20 ">
+        <!-- TWEETs -->
+        <div class="md:flex hidden flex-col px-8">
+            <app-tweet username="@felixmark"
+                content="Just tried wrokleap — clean UI, super smooth experience. 🔥 Definitely worth checking out!"
+                [positive]="false"></app-tweet>
+            <app-tweet username="@johndoe"
+                content="Loving how fast and intuitive workleap is. No clutter, just the features that matter. Great job"
+                [positive]="false"></app-tweet>
+        </div>
+        <!-- MAIN -->
+        <div class="md:ml-20 ml-4 flex flex-col gap-2">
+            <div class="lg:text-[4.9rem] text-[4rem] md:text-[4.5rem] text-zinc-100 tracking-tighter leading-none">Simplify your work <span
+                    class="bg-gradient-to-r from-cyan-400 px-2 py-0 blur-[0.1px] curvedText">experience</span>, move
+                your business forward</div>
+            <div class="text-zinc-600">Workleap helps you stay organized, manage tasks effortlessly, and boost team
+                productivity — all in one place. Streamline your work and leap ahead.</div>
+        </div>
+        <!-- CTAs -->
+        <div class="md:ml-20 ml-4 flex items-center gap-3 z-20">
+            <a href="/user/login"><app-button text="Login as a User" [isPrimary]="true"></app-button></a>
+            <a href="/business/login"><app-button text="Login as a Business" [isPrimary]="false"></app-button></a>
+        </div>
+        <!-- CIRCLE -->
+        <div class="absolute bg-transparent border-[1px] border-zinc-300 rounded-full md:w-[40vw] md:h-[40vw] h-[80vw] w-[80vw] opacity-15 flex justify-center items-center"></div>
+    </div>
+    <div>
+        <app-shadow></app-shadow>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<button 
+    [ngClass]="{
+        'bg-zinc-900 text-zinc-100': isPrimary && !disabled,
+        'text-black border-zinc-950 bg-zinc-100': !isPrimary && !disabled,
+        '': disabled,
+        'border-[1.5px] border-zinc-800 px-4 py-2 rounded-md w-full transition-all': true
+    }"
+    [disabled]="disabled"
+    (click)="onButtonClick()"
+    [type]="type"
+>
+    {{text}}
+</button>

@@ -1,0 +1,8 @@
+<div class="w-full text-center md:flex hidden flex-col items-center md:px-28 px-0 translate-y-[50px] gap-3 text-zinc-100">
+    <div>Trusted by 30+ businesses</div>
+    <div class="flex items-center gap-8 justify-between">
+        <div *ngFor="let item of companies" class="">
+            <app-company [company]="item"></app-company>
+        </div>
+    </div>
+</div>
