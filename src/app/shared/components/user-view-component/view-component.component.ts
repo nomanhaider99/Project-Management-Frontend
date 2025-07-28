@@ -23,6 +23,7 @@ export class UserViewProjectComponent implements OnInit {
   @Output() controlCreateMilestone = new EventEmitter<{ comp: string, projectId: string }>();
   @Output() controlAddMember = new EventEmitter<{ comp: string, projectId: string }>();
   @Output() controlAddTask = new EventEmitter<{ comp: string, projectId: string, milestone: string }>();
+  @Output() afterCompleteMilestoneEmmiter = new EventEmitter<{ comp: string, projectId: string, milestone: string }>();
 
   valueToBeEmit = {
     comp: 'create-milestone',
@@ -36,16 +37,19 @@ export class UserViewProjectComponent implements OnInit {
 
   ControlMilestoneCreationButtonClick(value: any) {
     this.controlCreateMilestone.emit(value);
-    console.log(value);
   }
 
   ControlAddMemberButtonClick(value: any) {
     this.controlAddMember.emit(value);
-    console.log(value);
   }
 
   ControlAddTaskButtonClick(value: any) {
     this.controlAddTask.emit(value);
+  }
+
+  ControlMilestoneCompletionButtonClick(value: any) {
+    this.afterCompleteMilestoneEmmiter.emit(value);
+    console.log(value);
   }
 
   getCurrentOpenedProject() {
@@ -88,8 +92,8 @@ export class UserViewProjectComponent implements OnInit {
     this.getCurrentOpenedProject();
   }
 
-  // ngOnChanges(): void {
-  //   this.fetchMilestones();
-  //   this.getCurrentOpenedProject();
-  // }
+  ngOnChanges(): void {
+    this.fetchMilestones();
+    this.getCurrentOpenedProject();
+  }
 }

@@ -41,7 +41,10 @@ export class UserService {
 
     getLoggedInUser(): Observable<any> {
         return this.http.get(`${environments.API_BASE_URL}/users/get-loggedin-user`, {
-            withCredentials: true
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'application/json'
+            },
         });
     }
 

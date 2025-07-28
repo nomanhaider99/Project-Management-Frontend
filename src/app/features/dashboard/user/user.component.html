@@ -45,6 +45,7 @@
         <div *ngIf="component == 'user-view'">
             <app-user-view-component
                 [projectId]="projectId"
+                (afterCompleteMilestoneEmmiter)="onMilestoneCompltedClick($event)"
             ></app-user-view-component>
         </div>
     </div>

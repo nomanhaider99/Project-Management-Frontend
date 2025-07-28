@@ -18,35 +18,39 @@ export class UserMilestoneComponent implements OnInit {
   @Input() tasks: TaskType[] = [];
   tasksService: TasksService = inject(TasksService);
   milestoneService: MilestoneService = inject(MilestoneService);
-  @Output() addTaskEmmiter = new EventEmitter<{comp: string, project: string, milestone: string}>();
+  @Output() addTaskEmmiter = new EventEmitter<{ comp: string, project: string, milestone: string }>();
   type: 'success' | 'error' = 'success';
   message: string = '';
+  @Output() completeMilesotneEmmiter = new EventEmitter<{ comp: string }>();
 
-  onMilestoneCompletion () {
+  onMilestoneCompletion() {
     this.milestoneService.updateMilestoneStatus(this.milestone, this.project)
-    .subscribe({
-      next: (res) => {
-        this.type = 'success';
-        this.message = 'Milestone Completed Successfully!'
-      },
-      error: (err) => {
-        this.type = 'error';
-        this.message = err.message;
-      },
-    });
+      .subscribe({
+        next: (res) => {
+          this.type = 'success';
+          this.message = 'Milestone Completed Successfully!'
+          this.completeMilesotneEmmiter.emit({
+            comp: 'projects'
+          });
+        },
+        error: (err) => {
+          this.type = 'error';
+          this.message = err.message;
+        },
+      });
   }
 
 
-  fetchTasksOfMilestone () {
+  fetchTasksOfMilestone() {
     this.tasksService.getTasksOfMilestone(this.milestone, this.project)
-    .subscribe({
-      next: (res: any) => {
-        this.tasks = res.data
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+      .subscribe({
+        next: (res: any) => {
+          this.tasks = res.data
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
 
   ngOnInit(): void {

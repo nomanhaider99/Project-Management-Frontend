@@ -24,6 +24,10 @@ export class UserDashboardComponent {
     this.projectId = value.id;
   }
 
+  onMilestoneCompltedClick (value: any) {
+    this.component = value.comp
+  }
+
   getBusiness() {
     this.userService.getLoggedInUser()
       .subscribe({
