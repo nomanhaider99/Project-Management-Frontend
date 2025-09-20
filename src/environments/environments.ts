@@ -1,4 +1,4 @@
 export const environments = {
     production: false,
-    API_BASE_URL: 'http://localhost:3000/api/v1'
+    API_BASE_URL: 'https://project-management-backend-peach.vercel.app/api/v1'
 }
